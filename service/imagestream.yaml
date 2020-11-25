@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  name: midservice
+  namespace: webproject
+  labels:
+    app: midservice
+spec:
+  lookupPolicy:
+    local: false

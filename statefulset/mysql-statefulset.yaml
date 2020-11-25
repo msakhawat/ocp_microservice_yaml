@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
+  namespace: webproject
+  labels:
+    app: mysql
 spec:
   selector:
     matchLabels:
@@ -191,7 +194,7 @@ spec:
   - metadata:
       name: data
     spec:
-      storageClassName: ocs-storagecluster-cephfs
+      storageClassName: sc-msa-data-db
       volumeMode: Filesystem
       accessModes: ["ReadWriteOnce"]
       resources:

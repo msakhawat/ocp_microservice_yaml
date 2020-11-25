@@ -1,0 +1,32 @@
+apiVersion: kafka.strimzi.io/v1alpha1
+kind: KafkaUser
+metadata:
+  name: kafka-producer
+  namespace: webproject
+  labels:
+    strimzi.io/cluster: kafkaserver1
+    app: msa-amq-stream
+spec:
+  authentication:
+    type: tls
+  authorization:
+    type: simple
+    acls:
+      - resource:
+          type: topic
+          name: Blog_Post
+          patternType: literal
+        operation: Write
+        host: "*"
+      - resource:
+          type: topic
+          name: Blog_Post
+          patternType: literal
+        operation: Create
+        host: "*"
+      - resource:
+          type: topic
+          name: Blog_Post
+          patternType: literal
+        operation: Describe
+        host: "*"

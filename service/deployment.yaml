@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: midservice
+  namespace: webproject
+  labels:
+    app: midservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: midservice
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: midservice
+    spec:
+      containers:
+      - name: midservice
+        image: image-registry.openshift-image-registry.svc:5000/webproject/midservice:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 200m
+          limits:
+            memory: 80Mi
+            cpu: 500m
+        env:
+        - name: DATABASE_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credential
+              key: username
+        - name: DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credential
+              key: password
+        - name: DATABASE_INSTANCE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: database-configmap
+              key: database_instance
+        - name: DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: database-configmap
+              key: database
+        - name: BROKERS
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-configmap
+              key: kafka_brokers
+        - name: CONSUMER_GROUP
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-configmap
+              key: kafka_consumer_group
+        - name: KAFKA_TOPIC
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-configmap
+              key: kafka_topic
+        - name: KAFKA_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: kafka-configmap
+              key: kafka_client_id
+      restartPolicy: Always

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-configmap
+  namespace: webproject
+data:
+  kafka_brokers: "kafkaserver1:9092"
+  kafka_client_id: blog_post
+  kafka_topic: blog-post
+  kafka_consumer_group: group1
