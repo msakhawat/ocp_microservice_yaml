@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: BuildConfig
 metadata:
-  name: midservice
+  name: midservice-buildconfig
   namespace: webproject
   labels:
     app: midservice

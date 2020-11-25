@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql
+  name: mysql-statefulset
   namespace: webproject
   labels:
     app: mysql
@@ -9,10 +9,12 @@ spec:
   selector:
     matchLabels:
       app: mysql
-  serviceName: mysql
+  serviceName: mysql-headless
   replicas: 1
   template:
     metadata:
+      name: mysql
+      namespace: webproject
       labels:
         app: mysql
     spec:

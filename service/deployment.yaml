@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: midservice
+  name: midservice-deployment
   namespace: webproject
   labels:
     app: midservice

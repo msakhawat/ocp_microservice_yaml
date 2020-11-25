@@ -1,7 +1,7 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: midservice
+  name: midservice-autoscale
   namespace: webproject
   labels:
     app: midservice

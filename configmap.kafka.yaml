@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: kafka-configmap
   namespace: webproject
+  labels:
+    app: webapp
 data:
   kafka_brokers: "kafkaserver1:9092"
   kafka_client_id: blog_post

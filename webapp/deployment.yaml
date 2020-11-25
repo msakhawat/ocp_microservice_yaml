@@ -1,11 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapp
+  name: webapp-deployment
   namespace: webproject
   labels:
     app: webapp
-    deploymentconfig: webapp
 spec:
   replicas: 1
   selector:
@@ -19,9 +18,10 @@ spec:
     type: RollingUpdate
   template:
     metadata:
+      name: webapp
+      namespace: webproject
       labels:
         app: webapp
-        deploymentconfig: webapp
     spec:
       containers:
       - name: webapp

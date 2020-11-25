@@ -10,7 +10,7 @@ Create deployment
 
 `oc apply -f deployment.yaml`
 
-Create autoscale
+Create service
 
 `oc apply -f service.yaml`
 
@@ -18,6 +18,6 @@ Create autoscale
 
 `oc apply -f autoscale.yaml`
 
-Create autoscale
+Create route
 
 `oc apply -f route.yaml`
